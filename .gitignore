@@ -218,3 +218,17 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ==========================================
+# GCP & Security (Garantia extra de credenciais)
+# ==========================================
+*.json
+keys/
+
+# ==========================================
+# Airflow Local Data & Logs
+# ==========================================
+logs/
+airflow.db
+airflow.cfg
+airflow-webserver.pid
