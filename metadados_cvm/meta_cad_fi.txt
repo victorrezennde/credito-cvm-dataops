@@ -1,0 +1,331 @@
+-----------------------
+Campo: ADMIN
+-----------------------
+   Descrição : Nome do Administrador
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 100
+
+-----------------------
+Campo: AUDITOR
+-----------------------
+   Descrição : Nome do Auditor
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 100
+
+-----------------------
+Campo: CD_CVM
+-----------------------
+   Descrição : Código CVM
+   Domínio   : Numérico
+   Tipo Dados: numeric
+   Precisão  : 7
+   Scale     : 0
+
+-----------------------
+Campo: CLASSE
+-----------------------
+   Descrição : Classe
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 100
+
+-----------------------
+Campo: CLASSE_ANBIMA
+-----------------------
+   Descrição : Classificação de Fundos regulados ANBIMA
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 100
+
+-----------------------
+Campo: CNPJ_ADMIN
+-----------------------
+   Descrição : CNPJ do Administrador
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 18
+
+-----------------------
+Campo: CNPJ_AUDITOR
+-----------------------
+   Descrição : CNPJ do Auditor
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 18
+
+-----------------------
+Campo: CNPJ_CONTROLADOR
+-----------------------
+   Descrição : CNPJ do Controlador
+   Domínio   : Numérico
+   Tipo Dados: varchar
+   Tamanho   : 18
+
+-----------------------
+Campo: CNPJ_CUSTODIANTE
+-----------------------
+   Descrição : CNPJ do Custodiante
+   Domínio   : Numérico
+   Tipo Dados: varchar
+   Tamanho   : 18
+
+-----------------------
+Campo: CNPJ_FUNDO
+-----------------------
+   Descrição : CNPJ do fundo
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 18
+
+-----------------------
+Campo: CONDOM
+-----------------------
+   Descrição : Forma de condomínio
+   Domínio   : Aberto/Fechado
+   Tipo Dados: varchar
+   Tamanho   : 100
+
+-----------------------
+Campo: CONTROLADOR
+-----------------------
+   Descrição : Nome do Controlador
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 100
+
+-----------------------
+Campo: CPF_CNPJ_GESTOR
+-----------------------
+   Descrição : Informa o código de identificação do gestor pessoa física ou jurídica
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 18
+
+-----------------------
+Campo: CUSTODIANTE
+-----------------------
+   Descrição : Nome do Custodiante
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 100
+
+-----------------------
+Campo: DENOM_SOCIAL
+-----------------------
+   Descrição : Denominação Social
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 100
+
+-----------------------
+Campo: DIRETOR
+-----------------------
+   Descrição : Nome do Diretor Responsável
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 100
+
+-----------------------
+Campo: DT_CANCEL
+-----------------------
+   Descrição : Data de cancelamento
+   Domínio   : AAAA-MM-DD
+   Tipo Dados: date
+   Tamanho   : 10
+
+-----------------------
+Campo: DT_CONST
+-----------------------
+   Descrição : Data de constituição
+   Domínio   : AAAA-MM-DD
+   Tipo Dados: date
+   Tamanho   : 10
+
+-----------------------
+Campo: DT_FIM_EXERC
+-----------------------
+   Descrição : Data fim do exercício social
+   Domínio   : AAAA-MM-DD
+   Tipo Dados: date
+   Tamanho   : 10
+
+-----------------------
+Campo: DT_INI_ATIV
+-----------------------
+   Descrição : Data de início de atividade
+   Domínio   : AAAA-MM-DD
+   Tipo Dados: date
+   Tamanho   : 10
+
+-----------------------
+Campo: DT_INI_CLASSE
+-----------------------
+   Descrição : Data de início na classe
+   Domínio   : AAAA-MM-DD
+   Tipo Dados: date
+   Tamanho   : 10
+
+-----------------------
+Campo: DT_INI_EXERC
+-----------------------
+   Descrição : Data início do exercício social
+   Domínio   : AAAA-MM-DD
+   Tipo Dados: date
+   Tamanho   : 10
+
+-----------------------
+Campo: DT_INI_SIT
+-----------------------
+   Descrição : Data início da situação
+   Domínio   : AAAA-MM-DD
+   Tipo Dados: date
+   Tamanho   : 10
+
+-----------------------
+Campo: DT_PATRIM_LIQ
+-----------------------
+   Descrição : Data do patrimônio líquido
+   Domínio   : AAAA-MM-DD
+   Tipo Dados: date
+   Tamanho   : 10
+
+-----------------------
+Campo: DT_REG
+-----------------------
+   Descrição : Data de registro
+   Domínio   : AAAA-MM-DD
+   Tipo Dados: date
+   Tamanho   : 10
+
+-----------------------
+Campo: ENTID_INVEST
+-----------------------
+   Descrição : Indica se o fundo é entidade de investimento
+   Domínio   : S/N
+   Tipo Dados: varchar
+   Tamanho   : 1
+
+-----------------------
+Campo: FUNDO_COTAS
+-----------------------
+   Descrição : Indica se é fundo de cotas
+   Domínio   : S/N
+   Tipo Dados: varchar
+   Tamanho   : 1
+
+-----------------------
+Campo: FUNDO_EXCLUSIVO
+-----------------------
+   Descrição : Indica se é fundo exclusivo
+   Domínio   : S/N
+   Tipo Dados: varchar
+   Tamanho   : 1
+
+-----------------------
+Campo: GESTOR
+-----------------------
+   Descrição : Nome do Gestor
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 100
+
+-----------------------
+Campo: INF_TAXA_ADM
+-----------------------
+   Descrição : Informações Adicionais (Taxa de administração)
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 400
+
+-----------------------
+Campo: INF_TAXA_PERFM
+-----------------------
+   Descrição : Informações Adicionais (Taxa de performance)
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 400
+
+-----------------------
+Campo: INVEST_CEMPR_EXTER
+-----------------------
+   Descrição : Indica se o fundo pode aplicar 100% dos recursos no exterior
+   Domínio   : S/N
+   Tipo Dados: varchar
+   Tamanho   : 1
+
+-----------------------
+Campo: PF_PJ_GESTOR
+-----------------------
+   Descrição : Indica se o gestor é pessoa física ou jurídica
+   Domínio   : PF/PJ
+   Tipo Dados: char
+   Tamanho   : 2
+
+-----------------------
+Campo: PUBLICO_ALVO
+-----------------------
+   Descrição : Público-alvo
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 15
+
+-----------------------
+Campo: RENTAB_FUNDO
+-----------------------
+   Descrição : Forma de rentabilidade do fundo (indicador de desempenho)
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 100
+
+-----------------------
+Campo: SIT
+-----------------------
+   Descrição : Situação
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 100
+
+-----------------------
+Campo: TAXA_ADM
+-----------------------
+   Descrição : Taxa de administração
+   Domínio   : Numérico
+   Tipo Dados: real
+   Precisão  : 24
+   Scale     : 
+
+-----------------------
+Campo: TAXA_PERFM
+-----------------------
+   Descrição : Taxa de performance
+   Domínio   : Numérico
+   Tipo Dados: real
+   Precisão  : 24
+   Scale     : 
+
+-----------------------
+Campo: TP_FUNDO
+-----------------------
+   Descrição : Tipo de fundo
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 20
+
+-----------------------
+Campo: TRIB_LPRAZO
+-----------------------
+   Descrição : Indica se possui tributação de longo prazo
+   Domínio   : S;N;N/A
+   Tipo Dados: varchar
+   Tamanho   : 3
+
+-----------------------
+Campo: VL_PATRIM_LIQ
+-----------------------
+   Descrição : Valor do patrimônio líquido
+   Domínio   : Numérico
+   Tipo Dados: numeric
+   Precisão  : 24
+   Scale     : 2

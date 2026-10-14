@@ -1,0 +1,85 @@
+-----------------------
+Campo: CAPTC_DIA
+-----------------------
+   Descrição : Captação do dia
+   Domínio   : Numérico
+   Tipo Dados: numeric
+   Precisão  : 17
+   Scale     : 2
+
+-----------------------
+Campo: CNPJ_FUNDO_CLASSE
+-----------------------
+   Descrição : CNPJ do fundo/classe
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 18
+
+-----------------------
+Campo: DT_COMPTC
+-----------------------
+   Descrição : Data de competência do documento
+   Domínio   : AAAA-MM-DD
+   Tipo Dados: date
+   Tamanho   : 10
+
+-----------------------
+Campo: ID_SUBCLASSE
+-----------------------
+   Descrição : Identificador da subclasse
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 15
+
+-----------------------
+Campo: NR_COTST
+-----------------------
+   Descrição : Número de cotistas
+   Domínio   : Numérico
+   Tipo Dados: int
+   Precisão  : 10
+   Scale     : 0
+
+-----------------------
+Campo: RESG_DIA
+-----------------------
+   Descrição : Resgate no dia
+   Domínio   : Numérico
+   Tipo Dados: numeric
+   Precisão  : 17
+   Scale     : 2
+
+-----------------------
+Campo: TP_FUNDO_CLASSE
+-----------------------
+   Descrição : Tipo de fundo/classe
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 20
+
+-----------------------
+Campo: VL_PATRIM_LIQ
+-----------------------
+   Descrição : Valor do patrimônio líquido
+   Domínio   : Numérico
+   Tipo Dados: numeric
+   Precisão  : 17
+   Scale     : 2
+
+-----------------------
+Campo: VL_QUOTA
+-----------------------
+   Descrição : Valor da cota
+   Domínio   : Numérico
+   Tipo Dados: numeric
+   Precisão  : 27
+   Scale     : 12
+
+-----------------------
+Campo: VL_TOTAL
+-----------------------
+   Descrição : Valor total da carteira
+   Domínio   : Numérico
+   Tipo Dados: numeric
+   Precisão  : 17
+   Scale     : 2

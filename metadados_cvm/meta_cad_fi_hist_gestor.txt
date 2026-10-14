@@ -1,0 +1,56 @@
+-----------------------
+Campo: CNPJ_FUNDO
+-----------------------
+   Descrição : CNPJ do fundo
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 18
+
+-----------------------
+Campo: CPF_CNPJ_GESTOR
+-----------------------
+   Descrição : Informa o código de identificação do gestor pessoa física ou jurídica
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 18
+
+-----------------------
+Campo: DT_FIM_GESTOR
+-----------------------
+   Descrição : Data fim do gestor
+   Domínio   : AAAA-MM-DD
+   Tipo Dados: date
+   Tamanho   : 10
+
+-----------------------
+Campo: DT_INI_GESTOR
+-----------------------
+   Descrição : Data início do gestor
+   Domínio   : AAAA-MM-DD
+   Tipo Dados: date
+   Tamanho   : 10
+
+-----------------------
+Campo: DT_REG
+-----------------------
+   Descrição : Data de registro
+   Domínio   : AAAA-MM-DD
+   Tipo Dados: date
+   Tamanho   : 10
+
+-----------------------
+Campo: GESTOR
+-----------------------
+   Descrição : Nome do Gestor
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 100
+
+-----------------------
+Campo: PF_PJ_GESTOR
+-----------------------
+   Descrição : Indica se o gestor é pessoa física ou jurídica
+   Domínio   : PF/PJ
+   Tipo Dados: char
+   Tamanho   : 2
+

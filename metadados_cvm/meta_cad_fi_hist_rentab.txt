@@ -1,0 +1,40 @@
+-----------------------
+Campo: CNPJ_FUNDO
+-----------------------
+   Descrição : CNPJ do fundo
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 18
+
+-----------------------
+Campo: DT_FIM_RENTAB
+-----------------------
+   Descrição : Data fim da rentabilidade
+   Domínio   : AAAA-MM-DD
+   Tipo Dados: date
+   Tamanho   : 10
+
+-----------------------
+Campo: DT_INI_RENTAB
+-----------------------
+   Descrição : Data início da rentabilidade
+   Domínio   : AAAA-MM-DD
+   Tipo Dados: date
+   Tamanho   : 10
+
+-----------------------
+Campo: DT_REG
+-----------------------
+   Descrição : Data de registro
+   Domínio   : AAAA-MM-DD
+   Tipo Dados: date
+   Tamanho   : 10
+
+-----------------------
+Campo: RENTAB_FUNDO
+-----------------------
+   Descrição : Forma de rentabilidade do fundo (indicador de desempenho)
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 100
+

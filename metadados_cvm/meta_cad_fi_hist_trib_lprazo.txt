@@ -1,0 +1,40 @@
+-----------------------
+Campo: CNPJ_FUNDO
+-----------------------
+   Descrição : CNPJ do fundo
+   Domínio   : Alfanumérico
+   Tipo Dados: varchar
+   Tamanho   : 18
+
+-----------------------
+Campo: DT_FIM_ST_TRIB_LPRAZO
+-----------------------
+   Descrição : Data fim do status de tributação de longo prazo
+   Domínio   : AAAA-MM-DD
+   Tipo Dados: date
+   Tamanho   : 10
+
+-----------------------
+Campo: DT_INI_ST_TRIB_LPRAZO
+-----------------------
+   Descrição : Data início do status de tributação de longo prazo
+   Domínio   : AAAA-MM-DD
+   Tipo Dados: date
+   Tamanho   : 10
+
+-----------------------
+Campo: DT_REG
+-----------------------
+   Descrição : Data de registro
+   Domínio   : AAAA-MM-DD
+   Tipo Dados: date
+   Tamanho   : 10
+
+-----------------------
+Campo: TRIB_LPRAZO
+-----------------------
+   Descrição : Indica se possui tributação de longo prazo
+   Domínio   : S;N;N/A
+   Tipo Dados: varchar
+   Tamanho   : 3
+
