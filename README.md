@@ -1,5 +1,5 @@
 # credito-cvm-dataops
-Se quiser investir seu dinheiro em fundos crédito privado sem olhar no seu app do banco e corretora, aqui é o lugar kkk
+Se quiser investir seu dinheiro em fundos crédito privado sem olhar no seu app do banco ou corretora, aqui é o lugar kkk
 
 Pipeline de integração de dados financeiros da CVM utilizando Python, SQL, Apache Airflow, GCP (GCS/BigQuery) e técnicas de DataOps.
 
