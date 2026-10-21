@@ -4,6 +4,54 @@ Todas as alterações notáveis e marcos do projeto serão documentados neste ar
 
 ---
 
+## [0.4.0] - 2026-10-20
+
+### 🎯 Funil de Screening em 6 Etapas (Universo Regulatório → Prateleira Comercial) & Comparativo CVM vs. Quantum
+
+#### Commits Relacionados:
+- `feat: consolida funil de screening de credito privado em 6 etapas com filtro comercial e diagnostico de aderencia cvm vs quantum`
+
+#### Detalhamento das Implementações:
+
+1. **Refino do Pipeline de Screening Posicional (Etapas 0 a 5 → Universo Regulatório CVM 175):**
+   * **Etapa 0 (Carteira Mais Recente):** Função `preparar_carteira_recente` converte `VL_MERC_POS_FINAL` para numérico (vírgula → ponto) e isola, por `CNPJ_CLEAN`, apenas a competência máxima (`DT_COMPTC`, com fallback para `DT_POSICAO`), eliminando duplicidade histórica.
+   * **Etapa 1 (Crédito ≥ 10% OU FIC):** Alocação direta em papéis de crédito (Debênture, LF, CDB/RDB, CRA, CRI, NP/Commercial Paper, DPGE, Debênture Permutável/Conversível, CDB Vinculado, FIDC e CCB) ou alocação em cotas ≥ 50% (`Fundo de Investimento e de Cotas`, `FI Participações`). Fundos com carteira zerada são descartados e a coluna `TP_ESTRUTURA` classifica cada fundo como `FIC` ou `MASTER/DIRETO`.
+   * **Etapa 2 (Exclusão de Exterior / IE):** Exclusão por regex na denominação social (`EXTERIOR`, `OFFSHORE`, `IE`, `FIEX`, etc.) combinada com o flag cadastral `INVEST_EXTER = 'S'`.
+   * **Etapa 3 (Teto de FIDC ≤ 30%):** Cálculo do `PCT_FIDC` sobre o total da carteira para isolar o crédito corporativo pulverizado.
+   * **Etapa 4 (Exclusão de Soberanos/Caixa):** Remoção de fundos com ≥ 95% em Títulos Públicos Federais + Operações Compromissadas ou com denominação indicando `SOBERANO`, `DI SIMPLES`, `TESOURO SELIC` ou `REFERENCIADO DI`.
+   * **Etapa 5 (Teto de Ações ≤ 3%):** Tolerância marginal para ações ON/PN, UNITS e certificados de depósito, consolidando o **Universo Regulatório** (`df_universo_regulatorio`, ~12.500 fundos).
+
+2. **Criação da Etapa 6 - Filtro Comercial (Prateleira):**
+   * Função `aplicar_etapa_6_comercial` cruza o universo regulatório com o cadastro e mantém apenas fundos não exclusivos (`FUNDO_EXCLUSIVO = 'N'`), gerando o `df_prateleira_comercial`.
+   * Orquestrador `rodar_pipeline_completo` passa a retornar os três datasets (`carteira_recente`, `universo_regulatorio`, `prateleira_comercial`).
+
+3. **Auditoria de Volumetria por Etapa:**
+   * Função `auditar_etapa` reporta, a cada passo do funil, entrantes, aprovados, filtrados (qtd e %), AUM retido (R$ Bi) e a aderência ao Quantum (CNPJs do Quantum retidos / total do Quantum).
+
+4. **Diagnóstico CVM vs. Quantum - Roteiro de Apresentação ao Negócio:**
+   * Enquadramento da diferença de volume: **CVM = visão regulatória da indústria de crédito (~12.500 fundos)** vs. **Quantum = prateleira comercial (~6.000 fundos)**.
+   * Evidências em dados reais organizadas em 3 pilares:
+     1. **Ilusão Master/Feeder:** multiplicação de CNPJs por famílias de FICs (agrupamento pelo nome da gestora/marca), que no Quantum aparecem como 1 ou 2 produtos.
+     2. **Fundos Exclusivos e de Tesouraria:** quantidade e AUM (R$ Bi) de veículos fechados que passam no filtro de crédito privado, mas não compõem a prateleira.
+     3. **Viabilidade Comercial:** fundos abertos ao público com AUM < R$ 5 Mi, tipicamente cortados pelas plataformas por falta de porte/liquidez.
+
+5. **Diagnóstico Técnico de Merge e Cadastro:**
+   * Amostragem de `CNPJ_CLEAN` do universo regulatório vs. cadastro, com exportação em CSV (`;`), para validar a padronização do CNPJ antes do cruzamento.
+   * Levantamento dos valores únicos reais de `FUNDO_EXCLUSIVO` e `SIT` no cadastro, para ajustar as condições de filtro às categorias efetivamente presentes na base.
+
+---
+
+### 🎯 Próximos Passos Programados
+- [ ] **Apresentação ao Time de Negócio:**
+  - [ ] Explicar a diferença de volume entre CVM (~12.500, visão regulatória) e Quantum (~6.000, prateleira comercial) com os 3 pilares de evidência.
+- [ ] **Calibragem da Prateleira Comercial (meta: ~2.000 fundos de crédito privado):**
+  - [ ] Definir os critérios de corte adicionais sobre o funil atual (ex.: porte mínimo de AUM, tratamento de FICs/Masters) e medir a aderência ao Quantum a cada ajuste.
+  - [ ] Validar os valores de `FUNDO_EXCLUSIVO` e `SIT` do cadastro para garantir que o filtro comercial (Etapa 6) esteja capturando o público-alvo correto.
+- [ ] **Construção da Camada Silver (Parquet & Data Lakehouse):**
+  - [ ] Implementar as transformações finais com a amostragem travada e chaves relacionais.
+- [ ] **Automação do Informe Diário (E-mail / Gold):**
+  - [ ] Desenvolver a geração do relatório em e-mail HTML (*Top Captação*, *Top Resgate* e *Top PL*).
+
 ## [0.3.0] - 2026-10-18
 
 ### 🧪 Prototipagem dos 5 Filtros, Mapeamento Master/FIC & Diagnóstico Quantum Axis
