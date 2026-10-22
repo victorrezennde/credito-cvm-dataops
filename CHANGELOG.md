@@ -2,7 +2,51 @@
 
 Todas as alterações notáveis e marcos do projeto serão documentados neste arquivo.
 
+## [0.5.0] - 2026-10-21
+
+### 🎯 Refatoração Modular, Expansão do Dicionário de Ativos (Etapa 1) e Geração da Base Master
+
+#### Commits Relacionados:
+- `feat: reajuste e organizacao do prototipo 5; Fizemos a validacao de algumas regras e filtros na base regulatoria da cvm de fundos de credito e geramos uma base de dados para analise exploratoria manual; Levarei este conteudo a gestores reais de fundos para delimitarmos uma amostragem melhor que a do quantum e mais eficiente`
+
+
+#### Commits Relacionados:
+- `refactor: modulariza pipeline de screening e isola dependencias em celulas independentes`
+- `feat: expande dicionario de ativos de credito privado e cotas para resgate de fundos aderentes ao quantum`
+- `feat: implementa geracao de base master consolidada cvm 175 para analise manual de gestores`
+- `fix: adiciona deteccao dinamica de coluna cnpj no merge do cadastro cvm`
+- `docs: cria prompts mestres (dicionario de dados e mapa de ingestao) para portabilidade de contexto ia`
+
+#### Detalhamento das Implementações:
+
+1. **Refatoração e Modularização do Código-Fonte:**
+   * Reestruturação do notebook em células lógicas e independentes: (1) Setup Global e GCP, (2) Carga Ampla CDA_FI, (3) Carga Quantum, (4) Deduplicação D-90 e (5) Execução Etapa 1.
+   * Centralização da função `limpar_cnpj` para prevenir bugs de truncamento (`float`/`.0`) em todas as transições de base.
+
+2. **Ampliação do Dicionário de Ativos (Etapa 1):**
+   * **Problema:** A Etapa 1 original estava reprovando ~2.285 fundos comercialmente válidos no Quantum por divergência taxonômica na CVM.
+   * **Solução:** Expansão da lista `PAPEIS_CREDITO_DIRETO` para incluir "Nota Comercial", "LIG", "Título Securitizado", "Direitos Creditórios", etc.
+   * Expansão da lista `PAPEIS_COTAS` para cobrir "Fundo de Investimento Imobiliário" (FIIs de papel) e nomenclaturas secundárias de FICs, forçando o aumento da taxa de retenção do Quantum.
+
+3. **Geração da Base Master CVM 175 (Data Discovery):**
+   * Criação de uma rotina de exportação (`Base_Master_CVM_175_Gestores.csv`) cruzando as agregações da Etapa 1 (PL, % Crédito, % Cotas) com 100% das colunas cadastrais da CVM.
+   * Implementação de um tratador de exceções dinâmico (`KeyError`) que identifica automaticamente a coluna de CNPJ no cadastro (`CNPJ_CLEAN`, `CNPJ_FUNDO_CLEAN` ou `CNPJ_FUNDO`).
+   * Arquivo gerado em `utf-8-sig` com separador `;` para facilitar a análise exploratória (Pivot Tables) pela equipa de gestores no Excel.
+
+4. **Engenharia de Prompts (Documentação Viva para LLMs):**
+   * Elaboração do `dicionario_cvm_filtros.txt`: Documento De-Para com o significado de cada coluna da base master e a lógica de negócio dos Blocos A, B e C.
+   * Elaboração do `mapa_ingestao_cvm.txt`: Guia arquitetural detalhando os *endpoints* públicos da CVM, o papel de cada ficheiro (CAD_FI, CDA_FI, INF_DIARIO) e as chaves de relacionamento necessárias para reconstruir o projeto noutros ambientes.
+
 ---
+
+### 🎯 Próximos Passos Programados
+- [ ] **Definição Final de Regras com o Negócio:**
+  - [ ] Receber o feedback dos gestores após análise da Base Master no Excel.
+  - [ ] Traduzir os cortes visuais (ex: público-alvo, PL mínimo, classes específicas) em código na Etapa 6.
+- [ ] **Execução das Etapas 2 a 6 com Dicionário Expandido:**
+  - [ ] Rodar o funil completo para validar a convergência final entre os ~13 mil fundos da CVM e os ~6 mil do Quantum Axis.
+- [ ] **Migração Cloud:**
+  - [ ] Iniciar o empacotamento deste pipeline refatorado em *jobs* PySpark/Pandas dentro da camada Silver do GCP (Lakehouse).
 
 ## [0.4.0] - 2026-10-20
 
