@@ -2,13 +2,50 @@
 
 Todas as alterações notáveis e marcos do projeto serão documentados neste arquivo.
 
+## [0.5.5] - 2026-10-27
+
+### 🎯 Refatoração dos Ingestores Bronze, Tratamento de Data Quality (CAD_FI/INF_DIARIO) & Preparação do Pipeline Silver
+
+#### Commits Relacionados:
+- `refactor: padroniza scripts de ingestao bronze cad_fi, inf_diario e cda_fi sem emojis e com orquestracao main`
+- `docs: adiciona versao 0.5.5 ao changelog retratando a consolidacao do pipeline silver e validacao em memoria`
+
+#### Detalhamento das Implementações:
+
+1. **Refatoração e Padronização dos Scripts de Ingestão Bronze:**
+   * **`01_prototipo_bronze_cad_fi.ipynb`:** Ajustada a lógica de ingestão do cadastro CVM para realizar o streaming idempotente e manter uma foto espelho atualizada na raiz (`cvm/cad_fi/cad_fi.csv`) em paralelo ao histórico particionado diário.
+   * **`02_prototipo_bronze_inf_diario.ipynb`:** Reestruturada a checagem de modificação diária para o mês corrente ($D-1$), evitando re-downloads no mesmo dia e mantendo meses consolidados imutáveis na Bronze.
+   * **`03_prototipo_bronze_cda_fi.ipynb`:** Ajustada a janela móvel de reavaliação de 90 dias referente ao sigilo de carteiras da CVM.
+   * Padronização visual dos logs de execução de todos os scripts Bronze utilizando estritamente os marcadores `[==>]`, `[+]`, `[-]` e `[!]`, com encapsulamento da execução em função `main()`.
+
+2. **Diagnóstico e Correção do Funil Silver (`05_prototipo_silver_elegiveis.ipynb`):**
+   * **Resolução da Perda de Dados Cadastrais (Célula 3B / Célula 5):** Ajustado o cruzamento com o cadastro CVM (`CAD_FI`) aplicando a sanitização explícita de `CNPJ_CLEAN` com `.str.zfill(14)` e deduplicação prévia, eliminando o preenchimento indevido com `"-"` em dados de classe, situação e prestadores de serviço.
+   * **Consolidação de Métricas do Informe Diário (Célula 5):** Corrigida a Etapa 5 do funil de elegibilidade para realizar o `.merge()` das métricas operacionais do Informe Diário (`VL_PATRIM_LIQ`, `VL_QUOTA`, `CAPTC_DIA`, `RESG_DIA`, `NR_COTST`), garantindo que a base final contenha o patrimônio líquido e valores de cota atualizados.
+   * **Tratamento de Tipos e Caixa Baixa (Célula 6):** Padronização de todas as colunas em minúsculas (`lowercase`), garantia de preservação do `cnpj_clean` como string numérica de 14 dígitos e tratamento padronizado de valores nulos (Datas $\rightarrow$ `'1900-01-01'`, Numéricos $\rightarrow$ `0.0`, Strings $\rightarrow$ `'-'`).
+
+3. **Dicionário Comercial da Silver & Função Dedicada de Insert (Células 7 e 8):**
+   * **Projeção de Colunas:** Seleção estratégica de 30 colunas chaves divididas em 5 blocos lógicos: Identificação/Cadastro, Prestadores de Serviço, Métricas de Carteira (CDA), Indicadores Diários de Fluxo/Movimentação (`captacao_liquida_dia`, `vl_patrim_liq`, `vl_quota`) e Rentabilidade/Taxas.
+   * **Modularização do Insert:** Isolamento do pipeline em duas etapas funcionais — `preparar_df_silver_movimentacao` (transformação e projeção de schema) e `inserir_fundo_elegivel_silver` (conversão para Apache Parquet via `pyarrow` e upload particionado por `dt_processamento=YYYY-MM-DD` no GCS).
+   * **Rotina de Validação de Completude:** Criação da função `validar_completude_silver` para auditar a qualidade e o percentual de preenchimento da base em memória antes de autorizar a gravação física no Lakehouse Silver.
+
+---
+
+### 🎯 Próximos Passos Programados
+- [ ] **Execução do Teste de Validação Final em Memória:**
+  - [ ] Rodar o orquestrador `main()` no `05_prototipo_silver_elegiveis` para confirmar a taxa de preenchimento dos blocos cadastrais e de fluxo.
+- [ ] **Aprovação e Efetivação do Insert na Silver:**
+  - [ ] Descomentar a etapa de upload no GCS (`inserir_fundo_elegivel_silver`) e gerar a primeira partição Parquet oficial em `gs://cvm-lakehouse-silver-dev/fundo_elegivel/`.
+- [ ] **Cálculo de Rentabilidade & Camada Gold:**
+  - [ ] Implementar a lógica de cálculo para `retorno_dia`, `% do CDI` e `retorno_nominal_mes` cruzando com a série do BCB/SGS.
+
+
 ## [0.5.0] - 2026-10-21
 
 ### 🎯 Refatoração Modular, Expansão do Dicionário de Ativos (Etapa 1) e Geração da Base Master
 
 #### Commits Relacionados:
 - `feat: reajuste e organizacao do prototipo 5; Fizemos a validacao de algumas regras e filtros na base regulatoria da cvm de fundos de credito e geramos uma base de dados para analise exploratoria manual; Levarei este conteudo a gestores reais de fundos para delimitarmos uma amostragem melhor que a do quantum e mais eficiente`
-
+- `doc: [0.5.0] ressalta a diferenca de logicas entre os motores da cvm e quantum, retrata o prototipo 5 e gera prompts complementares para EDA manual`
 
 #### Commits Relacionados:
 - `refactor: modulariza pipeline de screening e isola dependencias em celulas independentes`
